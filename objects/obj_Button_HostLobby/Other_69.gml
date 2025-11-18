@@ -7,9 +7,10 @@ switch(async_load[?"event_type"]){
         break;
     
     case "lobby_joined":
-        show_debug_message("Joined lobby");
+        
         if (steam_lobby_is_owner())
         {
+            show_debug_message("Joined your own lobby");
             steam_lobby_set_data("isGameMakerTest","true");
             steam_lobby_set_data("Creator", steam_get_persona_name());
             //can also set values for a lobby
