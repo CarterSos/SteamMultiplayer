@@ -34,6 +34,7 @@
     {"name":"rm_GameRoom","order":1,"path":"rooms/rm_GameRoom/rm_GameRoom.yy",},
     {"name":"Input","order":1,"path":"scripts/Input/Input.yy",},
     {"name":"PlayerMovement","order":2,"path":"scripts/PlayerMovement/PlayerMovement.yy",},
+    {"name":"Steamworks_Definitions","order":1,"path":"scripts/Steamworks_Definitions/Steamworks_Definitions.yy",},
     {"name":"spr_Ball","order":4,"path":"sprites/spr_Ball/spr_Ball.yy",},
     {"name":"spr_Bullet","order":6,"path":"sprites/spr_Bullet/spr_Bullet.yy",},
     {"name":"spr_Button","order":1,"path":"sprites/spr_Button/spr_Button.yy",},
