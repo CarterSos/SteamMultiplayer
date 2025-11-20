@@ -9,5 +9,5 @@ image_yscale = .5
 
 selectAction = function() {
     global.client = instance_create_depth(0,0,0,obj_Client);
-    steam_lobby_join_id(lobby_index); //lobby_id
+    steam_lobby_join_id(lobby_id); //lobby_index (not correct from mr youtube, but still helpful for earlier comment lol
 }
