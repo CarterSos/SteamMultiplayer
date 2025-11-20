@@ -18,7 +18,7 @@ function get_controls(_local)
 
 }
 
-function init_controls(){
+function init_controls(){ // pretty sure this just prevents the error of accessing var before it exists
 	//Directions inputs
 	rightKey	= 0
 	leftKey		= 0
