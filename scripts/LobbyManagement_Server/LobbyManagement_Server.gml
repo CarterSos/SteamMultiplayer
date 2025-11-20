@@ -24,7 +24,7 @@ function send_player_spawn(_steam_id, _slot){
 ///@self obj_Server
 function shrink_player_list(){
     var _shrunkList = playerList;
-    for (var _i = 0; i < array_length(_shrunkList); _i++){
+    for (var _i = 0; _i < array_length(_shrunkList); _i++){
         _shrunkList[_i].character = undefined;
     }
     return json_stringify(_shrunkList);
@@ -34,7 +34,7 @@ function shrink_player_list(){
 function server_player_spawn_at_pos(_steam_id, _pos){
     var _layer = layer_get_id("Instances");
     
-    for (var _i = 0; i < array_length(playerList); _i++){
+    for (var _i = 0; _i < array_length(playerList); _i++){
         if playerList[_i].steamID == _steam_id {
             var _inst = instance_create_layer(_pos.x, _pos.y, _layer, obj_Player,{
                 steamName: playerList[_i].steamName,
