@@ -14,13 +14,7 @@ while(steam_net_packet_receive()){
             send_player_input_to_clients(_playerInput);
             break;
         
-        case NETWORK_PACKETS.SERVER_PLAYER_INPUT:
-            
-            break;
-        
-        case NETWORK_PACKETS.PLAYER_POSITION:
-            
-            break;
+
         default:
             show_debug_message($"Unknown packet received: {string(_type)}");
     }   

@@ -51,8 +51,14 @@ while(steam_net_packet_receive()){
 			break;
         
         case NETWORK_PACKETS.SERVER_PLAYER_INPUT:
+            // these values are returned but the function already applies the logic to the players
             //{steamID: _steam_id, xInput: _xInput, yInput: _yInput, runKey: _runKey, actionKey: _actionKey}
-            receive_player_input(inbuf)
+            receive_player_input(inbuf);
+            break;
+        
+        case NETWORK_PACKETS.PLAYER_POSITION:
+            update_player_position(inbuf);
+            
             break;
         
 		default:

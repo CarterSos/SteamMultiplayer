@@ -51,3 +51,40 @@ function find_player_by_steam_id(_steam_id){
 	return noone;
     
 }
+
+///@desc Constantly update other clients on every player's position
+///@self obj_Server
+function send_player_positions() {
+    // this is all based on the SERVER's playerList so everyone will be updated to those values
+    for (var _i = 0; _i < array_length(playerList); _i++){	
+		var _player = playerList[_i];
+        // this is because there are a few frames where the player hasn't spawned so they don't have a character yet
+		if _player.character == undefined then continue;
+		if _player.steamID == undefined then continue;
+		var _b = buffer_create(13, buffer_fixed, 1); //1+8+2+2
+		buffer_write(_b, buffer_u8, NETWORK_PACKETS.PLAYER_POSITION);//1
+		buffer_write(_b, buffer_u64, _player.steamID);//8
+		buffer_write(_b, buffer_u16, _player.character.x);//2
+		buffer_write(_b, buffer_u16, _player.character.y);//2
+		for (var _k = 0; _k < array_length(playerList); _k++){
+			if (playerList[_k].steamID != obj_Server.steamID) {
+				steam_net_packet_send(playerList[_k].steamID, _b);
+			}
+		}
+		buffer_delete(_b);
+	}
+}
+
+///@self obj_Client
+function update_player_position(_b) {
+    var _steam_id = buffer_read(_b, buffer_u64);
+	var _x = buffer_read(_b, buffer_u16);
+	var _y = buffer_read(_b, buffer_u16);
+	for (var _i = 0; _i < array_length(playerList); _i++){
+		if (_steam_id == playerList[_i].steamID) {
+			if playerList[_i].character = undefined then continue;
+			playerList[_i].character.x = _x;
+			playerList[_i].character.y = _y;
+		}
+	}
+}
