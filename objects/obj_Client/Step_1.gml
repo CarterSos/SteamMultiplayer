@@ -49,6 +49,12 @@ while(steam_net_packet_receive()){
 			playerList[0].character = _inst
 			character = _inst
 			break;
+        
+        case NETWORK_PACKETS.SERVER_PLAYER_INPUT:
+            //{steamID: _steam_id, xInput: _xInput, yInput: _yInput, runKey: _runKey, actionKey: _actionKey}
+            receive_player_input(inbuf)
+            break;
+        
 		default:
 			show_debug_message("Unknown packet received: "+string(_type))
 			break;

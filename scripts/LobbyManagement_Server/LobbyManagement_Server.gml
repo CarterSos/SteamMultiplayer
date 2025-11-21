@@ -23,11 +23,11 @@ function send_player_spawn(_steam_id, _slot){
 
 ///@self obj_Server
 function shrink_player_list(){
-    var _shrunkList = playerList;
-    for (var _i = 0; _i < array_length(_shrunkList); _i++){
-        _shrunkList[_i].character = undefined;
-    }
-    return json_stringify(_shrunkList);
+    //var _shrunkList = playerList;
+    //for (var _i = 0; _i < array_length(_shrunkList); _i++){
+        //_shrunkList[_i].character = undefined;
+    //} // can probably simplify this later
+    return json_stringify(playerList);
 }
 
 ///@self obj_Server
@@ -63,4 +63,23 @@ function send_other_player_spawn(_steam_id, _pos){
         }
     }
     buffer_delete(_b);
+}
+
+///@self obj_Server
+function send_player_input_to_clients(_player_input){
+    if _player_input == undefined then return;
+        // need to adjust this for all acceptable player inputs
+	var _b = buffer_create(13, buffer_fixed, 1); //1+8+1+1+1+1
+	buffer_write(_b, buffer_u8, NETWORK_PACKETS.SERVER_PLAYER_INPUT);//1
+	buffer_write(_b, buffer_u64, _player_input.steamID);//8 //COULD TRY TO LIMIT THIS to optimize packet/data size
+	buffer_write(_b, buffer_s8, _player_input.xInput);//1
+	buffer_write(_b, buffer_s8, _player_input.yInput);//1
+	buffer_write(_b, buffer_u8, _player_input.runKey);//1
+	buffer_write(_b, buffer_u8, _player_input.actionKey);//1
+	for (var _i = 0; _i < array_length(obj_Server.playerList); _i++){
+		if (obj_Server.playerList[_i].steamID != obj_Server.steamID) {
+			steam_net_packet_send(obj_Server.playerList[_i].steamID, _b);
+		}
+	}
+	buffer_delete(_b);
 }
